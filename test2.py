@@ -40,28 +40,31 @@ def auth_website(url):
         # выполнение задачи
         try:
             driver.implicitly_wait(10)
-            
-            # Клик по элементу по css селектору
-            driver.find_element(By.CSS_SELECTOR, "body > div > p:nth-child(3) > a").click()
-            
-            current = driver.current_url
-            
-            print(f"{current}")
-            
+
             attempts = 0
             
             while attempts < 3:
-                
+            
+                # Клик по элементу по css селектору
+                driver.find_element(By.CSS_SELECTOR, "body > div > p:nth-child(3) > a").click()
+            
+                current = driver.current_url
+            
+                print(f"{current}")
+            
                 if current == "https://www.iana.org/help/example-domains":
                     print("Перенаправление успешно на:", current)
+                    
                     attempts += 4
+                    
+                    print("Переход выполнен успешно.")
                 else:
                     print("Перенаправление не произошло. Текущий URL:", current)
+                    
                     attempts += 1
+                    
                     print(f"Попытка: {attempts}")
                     
-            print("Переход выполнен успешно.")
-            
             input("Нажми на любую кнопку чтоб завершить работу драйвера...")
             
             close_browser(driver)
